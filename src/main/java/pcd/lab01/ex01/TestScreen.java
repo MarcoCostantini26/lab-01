@@ -1,6 +1,7 @@
 package pcd.lab01.ex01;
 
 import static org.fusesource.jansi.Ansi.*;
+import static pcd.lab01.ex01.AuxLib.getWordsPos;
 
 import org.fusesource.jansi.AnsiConsole;
 
@@ -18,17 +19,15 @@ public class TestScreen {
 
 		Screen screen = Screen.getInstance();
 		screen.clear();
-		
-		var x0 = 1;
-		var y0 = 10;
-		
-		for (int i = 1; i < 80; i++) {					
-			screen.writeStringAt(y0, x0 + i, Color.RED, "Hello");
-			try {
-				Thread.sleep(100);
-			} catch (Exception ex) {}
-			screen.writeStringAt(y0, x0 + i, Color.BLACK, "Hello");
+
+		var sentence = "This is a simple sentence with words ready to fall";
+
+		var wordList = getWordsPos(sentence);
+
+		for(var word : wordList){
+			new WordThread(word.pos(), 0, word.word()).run();
 		}
+			
 	}
 
 }
