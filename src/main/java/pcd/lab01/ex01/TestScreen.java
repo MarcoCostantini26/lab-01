@@ -24,10 +24,11 @@ public class TestScreen {
 
 		var wordList = getWordsPos(sentence);
 
-		for(var word : wordList){
-			new WordThread(word.pos(), 0, word.word()).run();
+		for(var wp : wordList){
+			var wordThread = new WordThread(wp.pos(), 0, wp.word());
+			wordThread.start();
 		}
-			
+
 	}
 
 }
